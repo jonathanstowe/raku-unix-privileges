@@ -12,7 +12,7 @@ class Build is Panda::Builder {
 		mkdir($blib);
 		mkdir("$blib/lib");
 		shell("make");
-		cp($so, "$blib/lib/");
+		cp($so, "$blib/lib/$so");
 		rm_rf($so);
 	}
 }
