@@ -7,6 +7,6 @@
     "provides" : {
         "UNIX::Privileges" : "lib/UNIX/Privileges.pm6"
     },
-    "source-url" : "git://github.com/carbin/p6-unix-privileges.git"
+    "source-url" : "git://github.com/nbrown/p6-unix-privileges.git"
 }
 
