@@ -1,24 +1,7 @@
 use v6;
 use NativeCall;
 
-sub library {
-	state Str $path;
-	unless $path {
-		my $libname = 'unix_privileges.so';
-		for @*INC {
-			my $inc-path = $_.IO.path.subst(/ ['file#' || 'inst#'] /, '');
-			my $check = $*SPEC.catfile($inc-path, $libname);
-			if $check.IO ~~ :f {
-				$path = $check;
-				last;
-			}
-		}
-		unless $path {
-			die "Unable to locate library: $libname";
-		}
-	}
-	$path;
-}
+my constant HELPER = %?RESOURCES<libraries/unix_privileges>.Str;
 
 class UNIX::Privileges::User is repr('CStruct') {
 	has Str 	$.login;
@@ -29,19 +12,19 @@ class UNIX::Privileges::User is repr('CStruct') {
 }
 
 sub UP_userinfo(Str $login, UNIX::Privileges::User $ui)
-is native(&library) returns int32 { ... }
+is native(HELPER) returns int32 { ... }
 
 sub UP_drop_privileges(int32 $new_uid, int32 $new_gid)
-is native(&library) returns int32 { ... }
+is native(HELPER) returns int32 { ... }
 
 sub UP_change_owner(Str $path, int32 $uid, int32 $gid)
-is native(&library) returns int32 { ... }
+is native(HELPER) returns int32 { ... }
 
 sub UP_change_root(Str $dirname)
-is native(&library) returns int32 { ... }
+is native(HELPER) returns int32 { ... }
 
 sub UP_set_error_callback(&callback (Str))
-is native(&library) { ... }
+is native(HELPER) { ... }
 
 my Str $error_msg;
 
