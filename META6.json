@@ -5,6 +5,8 @@
     "auth" : "github:carbin",
     "description" : "A module for handling UNIX Privileges",
     "depends" : [ ],
+    "build-depends" : [ "LibraryMake" ],
+    "resources" : [ "libraries/unix_privileges" ],
     "provides" : {
         "UNIX::Privileges" : "lib/UNIX/Privileges.pm6"
     },
