@@ -42,3 +42,23 @@ this with *zef* :
 
     zef install UNIX::Privileges
 
+Some of the tests won't be run unless they are run as 'root', and you
+may not be comfortable running a remote installer with escalated
+privileges, so you may want to checkout or otherwise download this
+package, run the 'root' tests with something like:
+
+   sudo zef test .
+
+(assuming that the Rakudo toolchain is in the global PATH.)
+
+
+## Support
+
+Please send any suggestions or patches via https://github.com/jonathanstowe/p6-unix-privileges/issues
+
+## License & Copyright
+
+This is free software, please see the [LICENCE](LICENCE) file in the distribution.
+
+© carlin 2015
+© Jonathan Stowe 2017 - 2019
