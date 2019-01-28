@@ -1,10 +1,11 @@
-use v6.c;
+use v6;
+
 use Shell::Command;
 use LibraryMake;
 
 class Build  {
-	method build($workdir) {
-        my $srcdir = $workdir.IO.child('src').Str;
+    method build($workdir) {
+        my $srcdir = $workdir.IO.add('src').Str;
         my Str $destdir = "$workdir/lib/../resources/libraries";
         mkpath $destdir;
         my %vars = get-vars($destdir);
@@ -15,7 +16,7 @@ class Build  {
         shell(%vars<MAKE>);
         chdir($goback);
 
-	}
+    }
     method isa($what) {
         return True if $what.^name eq 'Panda::Builder';
         callsame;
