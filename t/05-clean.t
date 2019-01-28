@@ -1,4 +1,5 @@
 use v6;
+
 use Test;
 
 plan 3;
@@ -8,11 +9,11 @@ plan 3;
 my @junk = '02-root-a', '02-root-b', '03-drop-str';
 
 for @junk {
-	unlink($_);
+    unlink($_);
 }
 
 for @junk {
-	nok $_.IO.e, "junk file $_ was removed";
+    nok $_.IO.e, "junk file $_ was removed";
 }
 
 # vim: ft=perl6

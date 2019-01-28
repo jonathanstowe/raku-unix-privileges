@@ -1,4 +1,5 @@
 use v6;
+
 use Test;
 
 use UNIX::Privileges;
@@ -7,7 +8,7 @@ plan 3;
 
 if +$*USER != 0 {
     skip 'these tests must be run as root', 3;
-	exit;
+    exit;
 }
 
 my $ch;
