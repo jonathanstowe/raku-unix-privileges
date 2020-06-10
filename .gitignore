@@ -3,3 +3,4 @@ resources
 .precomp
 Makefile
 *.o
+*~
