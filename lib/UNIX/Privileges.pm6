@@ -2,6 +2,15 @@ use NativeCall;
 
 unit module UNIX::Privileges;
 
+sub EXPORT {
+    %(
+      '$var'      => 'one',
+      '@array'    => <one two three>,
+      '%hash'     => %( one => 'two', three => 'four' ),
+      '&doit'     => sub { say 'Greetings from exported sub' },
+      'ShortName' => MyModule::Class
+    )
+}
 my constant HELPER = %?RESOURCES<libraries/unix_privileges>.Str;
 
 class User is repr('CStruct') {
@@ -30,7 +39,7 @@ sub set_error_msg(Str $msg) {
 
 UP_set_error_callback(&set_error_msg);
 
-our sub userinfo(Str $login --> User ) {
+our sub userinfo(Str $login --> User ) is export(:USER) {
         my $info = User.new();
         my $ret = UP_userinfo($login, $info);
         if $ret == -1 {
@@ -55,9 +64,9 @@ multi sub drop(Str $login --> Bool ) {
     drop($info);
 }
 
-our proto sub chown($, $) { * }
+our proto sub chown($, $) is export(:CH) { * }
 
-multi sub chown(User $user, Str $path --> Bool ) {
+multi sub chown(User $user, Str $path --> Bool )  is export(:CH)  {
     my $ret = UP_change_owner($path, $user.uid, $user.gid);
      given $ret {
     	when -1	{ die "fatal: " ~ $error_msg; }
@@ -66,12 +75,12 @@ multi sub chown(User $user, Str $path --> Bool ) {
     $ret == 0;
 }
 
-multi sub chown(Str $login, Str $path --> Bool ) {
+multi sub chown(Str $login, Str $path --> Bool )  is export(:CH)  {
     my $info = userinfo($login);
     chown($info, $path);
 }
 
-our sub chroot(Str $dirname --> Bool ) {
+our sub chroot(Str $dirname --> Bool )  is export(:CH) {
     my $ret = UP_change_root($dirname);
     if $ret == -1 {
     	die "fatal: could not change root";
