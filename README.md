@@ -50,8 +50,7 @@ Example with a chroot:
 
 ## Installation
 
-Assuming ypu have a working Rakudo Perl 6 installation you can install
-this with *zef* :
+Assuming ypu have a working Rakudo installation you can install this with *zef* :
 
     zef install UNIX::Privileges
 
@@ -67,11 +66,11 @@ package, run the 'root' tests with something like:
 
 ## Support
 
-Please send any suggestions or patches via https://github.com/jonathanstowe/p6-unix-privileges/issues
+Please send any suggestions or patches via https://github.com/jonathanstowe/raku-unix-privileges/issues
 
 ## License & Copyright
 
 This is free software, please see the [LICENCE](LICENCE) file in the distribution.
 
 © carlin 2015
-© Jonathan Stowe 2017 - 2019
+© Jonathan Stowe 2017 - 2020

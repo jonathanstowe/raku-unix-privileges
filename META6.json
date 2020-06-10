@@ -1,11 +1,11 @@
 {
   "name": "UNIX::Privileges",
-  "version": "0.1.2.1",
-  "auth": "github:carbin",
+  "version": "0.1.3",
+  "auth": "github:jonathanstowe",
   "api" : "1.0",
-  "source-url": "git://github.com/jonathanstowe/p6-unix-privileges.git",
+  "source-url": "https://github.com/jonathanstowe/raku-unix-privileges.git",
   "support": {
-    "source": "git://github.com/jonathanstowe/p6-unix-privileges.git",
+    "source": "https://github.com/jonathanstowe/raku-unix-privileges.git",
     "bugtracker": "https://github.com/jonathanstowe/p6-unix-privileges/issues"
   },
   "perl": "6.d",
@@ -14,7 +14,7 @@
   ],
   "build-depends": [
     "LibraryMake",
-	"Shell::Command"
+	 "Shell::Command"
   ],
   "author": "github:carbin",
   "depends": [ ],
@@ -26,12 +26,12 @@
   "license": "ISC",
   "test-depends": [ ],
   "provides": {
-    "UNIX::Privileges": "lib/UNIX/Privileges.pm6"
+    "UNIX::Privileges": "lib/UNIX/Privileges.rakumod"
   },
   "authors": [
 	"carbin",
     "jonathanstowe"
   ],
   "description": "A module for handling UNIX Privileges",
-  "meta-version": "0"
+  "meta-version": "1"
 }

@@ -62,7 +62,7 @@
           "name": "UNIX",
           "children": [
             {
-              "name": "Privileges.pm6",
+              "name": "Privileges.rakumod",
               "type": "file"
             }
           ]
