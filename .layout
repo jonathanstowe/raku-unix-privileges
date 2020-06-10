@@ -22,6 +22,10 @@
           "type": "file"
         },
         {
+          "name": "06-export-all.t",
+          "type": "file"
+        },
+        {
           "name": "02-root.t",
           "type": "file"
         },
