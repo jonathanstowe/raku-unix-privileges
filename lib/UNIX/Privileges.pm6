@@ -48,9 +48,9 @@ our sub userinfo(Str $login --> User ) is export(:USER) {
         $info;
 }
 
-our proto sub drop($) { * }
+our proto sub drop($)  is export(:ALL){ * }
 
-multi sub drop(User $user --> Bool ) {
+multi sub drop(User $user --> Bool ) is export(:ALL) {
     my $ret = UP_drop_privileges($user.uid, $user.gid);
     given $ret {
     	when -1	{ die "fatal: " ~ $error_msg; }
@@ -59,7 +59,7 @@ multi sub drop(User $user --> Bool ) {
     $ret == 0;
 }
 
-multi sub drop(Str $login --> Bool ) {
+multi sub drop(Str $login --> Bool ) is export(:ALL) {
     my $info = userinfo($login);
     drop($info);
 }
