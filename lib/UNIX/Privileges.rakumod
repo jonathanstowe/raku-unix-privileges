@@ -12,7 +12,14 @@ module UNIX::Privileges {
         has Str     $.shell;
     }
 
+    class Group is repr('CStruct') {
+        has Str     $.name;
+        has int32   $.gid;
+    }
+
     sub UP_userinfo(Str $login, User $ui --> int32 ) is native(HELPER) { ... }
+
+    sub UP_groupinfo(Str $group, User $gi --> int32 ) is native(HELPER) { ... }
 
     sub UP_drop_privileges(int32 $new_uid, int32 $new_gid --> int32 ) is native(HELPER) { ... }
 
@@ -39,6 +46,15 @@ module UNIX::Privileges {
         $info;
     }
 
+    our sub groupinfo(Str $group --> Group ) is export(:USER) {
+        my $info = Group.new();
+        my $ret = UP_groupinfo($group, $info);
+        if $ret == -1 {
+            die "fatal: " ~ $error_msg;
+        }
+        $info;
+    }
+
     our proto sub drop($)  is export(:ALL){ * }
 
     multi sub drop(User $user --> Bool ) is export(:ALL) {
@@ -55,7 +71,7 @@ module UNIX::Privileges {
         drop($info);
     }
 
-    our proto sub chown($, $) is export(:CH) { * }
+    our proto sub chown(|) is export(:CH) { * }
 
     multi sub chown(User $user, Str $path --> Bool )  is export(:CH)  {
         my $ret = UP_change_owner($path, $user.uid, $user.gid);
@@ -67,6 +83,12 @@ module UNIX::Privileges {
     }
 
     multi sub chown(Str $login, Str $path --> Bool )  is export(:CH)  {
+        my $info = userinfo($login);
+        chown($info, $path);
+    }
+
+    multi sub chown(Str $login, Str $group, Str $path --> Bool )
+            is export(:CH)  {
         my $info = userinfo($login);
         chown($info, $path);
     }

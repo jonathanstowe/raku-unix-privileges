@@ -4,11 +4,14 @@ use Test;
 
 use UNIX::Privileges;
 
-plan 3;
+plan 4;
 
 {
     my $user = UNIX::Privileges::userinfo(~$*USER);
     is $user.uid, +$*USER, 'user id matches';
+
+    my $group = UNIX::Privileges::groupinfo(~$*GROUP);
+    is $group.gid, +$*GROUP, 'group id matches';
 
     my $filename = '01-noroot';
     spurt($filename, "'twas brillig and the slithy toves\n");

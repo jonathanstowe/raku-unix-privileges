@@ -13,6 +13,12 @@ typedef struct userinfo {
     char	*shell;
 } userinfo;
 
+typedef struct groupinfo {
+    char	*group_name;
+    gid_t	 gid;
+} groupinfo;
+
+
 /*    Populates the passed userinfo struct.
  *    Every OS defines their passwd struct differently so we cannot
  *    rely on accessing it using NativeCall, hence this abstraction.
@@ -34,6 +40,25 @@ UP_userinfo(char *user, struct userinfo *ui)
     ui->gid		= pw->pw_gid;
     ui->home	= pw->pw_dir;
     ui->shell	= pw->pw_shell;
+
+    return 0;
+}
+
+/*
+*    Populates the passed groupinfo struct.
+ */
+int
+UP_groupinfo(char *group, struct groupinfo *gi)
+{
+    struct group 	*gr;
+
+    if ((gr = getgrnam(group)) == NULL) {
+    	UP_set_error("could not get user info: no such user");
+    	return -1;
+    }
+
+    gi->group_name	= gr->gr_name;
+    gi->gid		= gr->gr_gid;
 
     return 0;
 }
