@@ -1,6 +1,6 @@
 {
   "name": "UNIX::Privileges",
-  "version": "0.1.2",
+  "version": "0.1.2.1",
   "auth": "github:carbin",
   "api" : "1.0",
   "source-url": "git://github.com/jonathanstowe/p6-unix-privileges.git",
@@ -8,7 +8,7 @@
     "source": "git://github.com/jonathanstowe/p6-unix-privileges.git",
     "bugtracker": "https://github.com/jonathanstowe/p6-unix-privileges/issues"
   },
-  "perl": "6.*",
+  "perl": "6.d",
   "resources": [
     "libraries/unix_privileges"
   ],
