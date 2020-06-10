@@ -47,7 +47,7 @@ may not be comfortable running a remote installer with escalated
 privileges, so you may want to checkout or otherwise download this
 package, run the 'root' tests with something like:
 
-   sudo zef test .
+    sudo zef test .
 
 (assuming that the Rakudo toolchain is in the global PATH.)
 
