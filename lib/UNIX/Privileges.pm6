@@ -1,7 +1,6 @@
-use v6;
-
 use NativeCall;
 
+unit module UNIX::Privileges;
 
 module UNIX::Privileges {
 
@@ -33,7 +32,7 @@ module UNIX::Privileges {
 
     UP_set_error_callback(&set_error_msg);
 
-    our sub userinfo(Str $login --> User ) {
+    our sub userinfo(Str $login --> User ) is export(:USER) {
         my $info = User.new();
         my $ret = UP_userinfo($login, $info);
         if $ret == -1 {
@@ -58,26 +57,26 @@ module UNIX::Privileges {
         drop($info);
     }
 
-    our proto sub chown($, $) { * }
+    our proto sub chown($, $) is export(:CH) { * }
 
-    multi sub chown(User $user, Str $path --> Bool ) {
+    multi sub chown(User $user, Str $path --> Bool )  is export(:CH)  {
         my $ret = UP_change_owner($path, $user.uid, $user.gid);
          given $ret {
-        	when -1	{ die "fatal: " ~ $error_msg; }
-        	when 1	{ warn "warning: " ~ $error_msg; }
+            when -1	{ die "fatal: " ~ $error_msg; }
+            when 1	{ warn "warning: " ~ $error_msg; }
         }
         $ret == 0;
     }
 
-    multi sub chown(Str $login, Str $path --> Bool ) {
+    multi sub chown(Str $login, Str $path --> Bool )  is export(:CH)  {
         my $info = userinfo($login);
         chown($info, $path);
     }
 
-    our sub chroot(Str $dirname --> Bool ) {
+    our sub chroot(Str $dirname --> Bool )  is export(:CH) {
         my $ret = UP_change_root($dirname);
         if $ret == -1 {
-        	die "fatal: could not change root";
+            die "fatal: could not change root";
         }
         chdir("/");
         $ret == 0;
