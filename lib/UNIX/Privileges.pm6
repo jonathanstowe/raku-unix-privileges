@@ -2,15 +2,6 @@ use NativeCall;
 
 unit module UNIX::Privileges;
 
-sub EXPORT {
-    %(
-      '$var'      => 'one',
-      '@array'    => <one two three>,
-      '%hash'     => %( one => 'two', three => 'four' ),
-      '&doit'     => sub { say 'Greetings from exported sub' },
-      'ShortName' => MyModule::Class
-    )
-}
 my constant HELPER = %?RESOURCES<libraries/unix_privileges>.Str;
 
 class User is repr('CStruct') {
