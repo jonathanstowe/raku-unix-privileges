@@ -89,8 +89,14 @@ module UNIX::Privileges {
 
     multi sub chown(Str $login, Str $group, Str $path --> Bool )
             is export(:CH)  {
-        my $info = userinfo($login);
-        chown($info, $path);
+        my $user-info = userinfo($login);
+        my $group-info = groupinfo($group);
+        my $ret = UP_change_owner($path, $user-info.uid, $group-info.gid);
+        given $ret {
+            when -1	{ die "fatal: " ~ $error_msg; }
+            when 1	{ warn "warning: " ~ $error_msg; }
+        }
+        $ret == 0;
     }
 
     our sub chroot(Str $dirname --> Bool )  is export(:CH) {

@@ -4,7 +4,7 @@ use Test;
 
 use UNIX::Privileges;
 
-plan 4;
+plan 5;
 
 {
     my $user = UNIX::Privileges::userinfo(~$*USER);
@@ -18,6 +18,9 @@ plan 4;
 
     ok UNIX::Privileges::chown(~$*USER, $filename), 'chown worked (no-op)';
     ok UNIX::Privileges::chown($user, $filename), 'chown worked (no-op)';
+    ok UNIX::Privileges::chown(~$*USER, ~$*GROUP, $filename), 'chown worked
+(no-op)';
+
 
     unlink($filename);
 }
