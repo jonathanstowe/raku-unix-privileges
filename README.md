@@ -13,6 +13,19 @@ Synopsis:
 	UNIX::Privileges::drop($user);
 	UNIX::Privileges::chroot($directory);
 
+You can also do
+
+```perl6
+use UNIX::Privileges :ALL;
+
+userinfo($user);
+chown($user, $file);
+drop($user);
+chroot($directory);
+```
+
+The `:CH` tag will import `chown` and `chroot` and the `USER` tag will import only `USER`.
+
 Example usage:
 
 	use UNIX::Privileges;
