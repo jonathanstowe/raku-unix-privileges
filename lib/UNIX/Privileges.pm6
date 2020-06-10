@@ -1,15 +1,13 @@
 use NativeCall;
 
-unit module UNIX::Privileges;
-
 module UNIX::Privileges {
 
     my constant HELPER = %?RESOURCES<libraries/unix_privileges>.Str;
 
     class User is repr('CStruct') {
         has Str     $.login;
-        has int32     $.uid;
-        has int32     $.gid;
+        has int32   $.uid;
+        has int32   $.gid;
         has Str     $.home;
         has Str     $.shell;
     }
@@ -27,7 +25,7 @@ module UNIX::Privileges {
     my Str $error_msg;
 
     sub set_error_msg(Str $msg) {
-        $error_msg = $msg;
+            $error_msg = $msg;
     }
 
     UP_set_error_callback(&set_error_msg);
@@ -36,23 +34,23 @@ module UNIX::Privileges {
         my $info = User.new();
         my $ret = UP_userinfo($login, $info);
         if $ret == -1 {
-        	die "fatal: " ~ $error_msg;
+            die "fatal: " ~ $error_msg;
         }
         $info;
     }
 
-    our proto sub drop($) { * }
+    our proto sub drop($)  is export(:ALL){ * }
 
-    multi sub drop(User $user --> Bool ) {
+    multi sub drop(User $user --> Bool ) is export(:ALL) {
         my $ret = UP_drop_privileges($user.uid, $user.gid);
         given $ret {
-        	when -1	{ die "fatal: " ~ $error_msg; }
-        	when 1 	{ warn "warning: " ~ $error_msg; }
+            when -1	{ die "fatal: " ~ $error_msg; }
+            when 1 	{ warn "warning: " ~ $error_msg; }
         }
         $ret == 0;
     }
 
-    multi sub drop(Str $login --> Bool ) {
+    multi sub drop(Str $login --> Bool ) is export(:ALL) {
         my $info = userinfo($login);
         drop($info);
     }
