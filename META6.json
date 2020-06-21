@@ -12,19 +12,15 @@
   "resources": [
     "libraries/unix_privileges"
   ],
-  "build-depends": [
-    "LibraryMake",
-	 "Shell::Command"
-  ],
   "author": "github:carbin",
-  "depends": [ ],
+  "depends": [ "LibraryMake",
+	       "Shell::Command" ],
   "tags": [
     "unix",
     "privileges",
     "daemon"
   ],
   "license": "ISC",
-  "test-depends": [ ],
   "provides": {
     "UNIX::Privileges": "lib/UNIX/Privileges.rakumod"
   },
