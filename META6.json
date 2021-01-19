@@ -8,13 +8,30 @@
     "source": "https://github.com/jonathanstowe/raku-unix-privileges.git",
     "bugtracker": "https://github.com/jonathanstowe/p6-unix-privileges/issues"
   },
-  "perl": "6.d",
+  "perl": "6.*",
+  "raku": "6.*",
   "resources": [
     "libraries/unix_privileges"
   ],
+  "depends": {
+     "build" : {
+        "requires" : [
+           "Distribution::Builder::MakeFromJSON:ver<0.6+>"
+        ]
+     },
+     "runtime": {
+        "requires": [
+        ]
+     }
+  },
+  "builder": "Distribution::Builder::MakeFromJSON",
+  "build" : {
+     "src-dir" : "src",
+     "makefile-variables" : {
+        "unix_privileges": {"resource": "libraries/unix_privileges"}
+     }
+  },
   "author": "github:carbin",
-  "depends": [ "LibraryMake",
-	       "Shell::Command" ],
   "tags": [
     "unix",
     "privileges",

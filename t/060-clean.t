@@ -16,4 +16,4 @@ for @junk {
     nok $_.IO.e, "junk file $_ was removed";
 }
 
-# vim: ft=perl6
+# vim: ft=raku6

@@ -58,4 +58,4 @@ if "$file2".IO.e {
     dies-ok { spurt($file2, "blah\n") }, 'cannot write to file owned by root';
 }
 
-# vim: ft=perl6
+# vim: ft=raku6

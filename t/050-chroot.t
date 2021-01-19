@@ -17,4 +17,4 @@ ok $ch, 'chroot succeeded';
 
 is $*CWD, "/", 'chroot changed path to new root';
 
-# vim: ft=perl6
+# vim: ft=raku6

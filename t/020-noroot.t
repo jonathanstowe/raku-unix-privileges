@@ -25,4 +25,4 @@ plan 5;
     unlink($filename);
 }
 
-# vim: ft=perl6
+# vim: ft=raku6
