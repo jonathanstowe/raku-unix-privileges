@@ -1,50 +1,46 @@
 {
   "name": "UNIX::Privileges",
-  "version": "0.1.4",
-  "auth": "github:jonathanstowe",
-  "api" : "1.0",
-  "source-url": "https://github.com/jonathanstowe/raku-unix-privileges.git",
-  "support": {
-    "source": "https://github.com/jonathanstowe/raku-unix-privileges.git",
-    "bugtracker": "https://github.com/jonathanstowe/p6-unix-privileges/issues"
-  },
-  "perl": "6.*",
-  "raku": "6.*",
-  "resources": [
-    "libraries/unix_privileges"
-  ],
-  "depends": {
-     "build" : {
-        "requires" : [
-           "Distribution::Builder::MakeFromJSON:ver<0.6+>"
-        ]
-     },
-     "runtime": {
-        "requires": [
-        ]
-     }
-  },
-  "builder": "Distribution::Builder::MakeFromJSON",
-  "build" : {
-     "src-dir" : "src",
-     "makefile-variables" : {
-        "unix_privileges": {"resource": "libraries/unix_privileges"}
-     }
-  },
-  "author": "github:carbin",
   "tags": [
     "unix",
     "privileges",
     "daemon"
   ],
+  "resources": [
+    "libraries/unix_privileges"
+  ],
+  "source-url": "https://github.com/jonathanstowe/raku-unix-privileges.git",
+  "description": "A module for handling UNIX Privileges",
+  "support": {
+    "source": "https://github.com/jonathanstowe/raku-unix-privileges.git",
+    "bugtracker": "https://github.com/jonathanstowe/p6-unix-privileges/issues"
+  },
+  "test-depends": [
+  ],
+  "api": "1.0",
+  "auth": "zef:jonathanstowe",
+  "meta-version": "1",
+  "authors": [
+    "carbin",
+    "jonathanstowe"
+  ],
+  "depends": {
+    "runtime": {
+      "requires": [
+      ]
+    },
+    "build": {
+      "requires": [
+        "Distribution::Builder::MakeFromJSON:ver<0.6+>"
+      ]
+    }
+  },
+  "raku": "6.*",
   "license": "ISC",
+  "version": "0.1.5",
+  "author": "github:carbin",
   "provides": {
     "UNIX::Privileges": "lib/UNIX/Privileges.rakumod"
   },
-  "authors": [
-	"carbin",
-    "jonathanstowe"
-  ],
-  "description": "A module for handling UNIX Privileges",
-  "meta-version": "1"
+  "build-depends": [
+  ]
 }
