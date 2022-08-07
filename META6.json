@@ -34,9 +34,16 @@
       ]
     }
   },
+  "builder": "Distribution::Builder::MakeFromJSON",
+  "build" : {
+     "src-dir" : "src",
+     "makefile-variables" : {
+        "unix_privileges": {"resource": "libraries/unix_privileges"}
+     }
+  },
   "raku": "6.*",
   "license": "ISC",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "author": "github:carbin",
   "provides": {
     "UNIX::Privileges": "lib/UNIX/Privileges.rakumod"
